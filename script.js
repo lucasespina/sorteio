@@ -1,5 +1,5 @@
 // Nomes que não podem ser sorteados
-const NOMES_BLOQUEADOS = ['espina', 'bundinha', 'mathé', 'mathe'];
+const NOMES_BLOQUEADOS = ['espina', 'bundinha', 'mathé', 'mathe', ];
 
 function getAllNames() {
     const input = document.getElementById('namesInput').value;
