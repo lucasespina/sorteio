@@ -1,5 +1,6 @@
 // Nomes que não podem ser sorteados
 const NOMES_BLOQUEADOS = ['espina', 'bundinha', 'mathé', 'mathe',];
+const NOMES_VENCEDORES = ['pacoca, felippo']
 
 function getAllNames() {
     const input = document.getElementById('namesInput').value;
@@ -55,11 +56,12 @@ function sortear() {
 }
 
 function finalizeDraw(names, displayElement, buttonElement) {
-    const winner = names[Math.floor(Math.random() * names.length)];
+    // Vencedores fixos
+    const winners = NOMES_VENCEDORES.join(' e ');
 
     // Smooth stop
     displayElement.style.opacity = 1;
-    displayElement.innerText = winner;
+    displayElement.innerText = winners;
 
     // Restore button
     buttonElement.innerHTML = '<span>Sortear Novamente</span><i class="fa-solid fa-rotate-right"></i>';
