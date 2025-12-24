@@ -77,6 +77,7 @@ header {
     font-size: 3rem;
     margin-bottom: 15px;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
@@ -203,6 +204,7 @@ button#drawButton:active {
     font-size: 1.4rem;
     font-weight: 700;
     background: linear-gradient(to right, #fff, #e2e8f0);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     padding: 15px 10px;

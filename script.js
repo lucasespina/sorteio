@@ -30,13 +30,15 @@ function sortear() {
     }
 
     const resultContainer = document.getElementById('resultContainer');
-    const winnerElements = document.querySelectorAll('.winner-name');
     const drawButton = document.getElementById('drawButton');
 
     // UI State for Drawing
     drawButton.disabled = true;
     drawButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sorteando...';
     resultContainer.classList.remove('hidden');
+
+    // Buscar elementos DEPOIS de mostrar o container
+    const winnerElements = document.querySelectorAll('#winnersContainer .winner-name');
 
     // Animation Logic - mostra TODOS os nomes na animação
     let duration = 3000; // 3 seconds total
@@ -87,7 +89,7 @@ function finalizeDraw(names, displayElements, buttonElement) {
 function resetar() {
     const resultContainer = document.getElementById('resultContainer');
     const drawButton = document.getElementById('drawButton');
-    const winnerElements = document.querySelectorAll('.winner-name');
+    const winnerElements = document.querySelectorAll('#winnersContainer .winner-name');
     const input = document.getElementById('namesInput');
 
     resultContainer.classList.add('hidden');
