@@ -13,23 +13,22 @@ function getValidNames(names) {
     return names.filter(name => !NOMES_BLOQUEADOS.includes(name.toLowerCase()));
 }
 
-const QUANTIDADE_SORTEADOS = 4;
-
 function sortear() {
     const allNames = getAllNames();
     const validNames = getValidNames(allNames);
 
     if (allNames.length === 0) {
-        alert('Por favor, insira pelo menos ' + QUANTIDADE_SORTEADOS + ' nomes para sortear.');
+        alert('Por favor, insira pelo menos um nome para sortear.');
         return;
     }
 
-    if (validNames.length < QUANTIDADE_SORTEADOS) {
-        alert('São necessários pelo menos ' + QUANTIDADE_SORTEADOS + ' nomes válidos para sortear. Nomes bloqueados não são contabilizados.');
+    if (validNames.length === 0) {
+        alert('Não há nomes válidos para sortear.');
         return;
     }
 
     const resultContainer = document.getElementById('resultContainer');
+    const winnerNameElement = document.getElementById('winnerName');
     const drawButton = document.getElementById('drawButton');
 
     // UI State for Drawing
@@ -37,45 +36,30 @@ function sortear() {
     drawButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sorteando...';
     resultContainer.classList.remove('hidden');
 
-    // Buscar elementos DEPOIS de mostrar o container
-    const winnerElements = document.querySelectorAll('#winnersContainer .winner-name');
-
     // Animation Logic - mostra TODOS os nomes na animação
     let duration = 3000; // 3 seconds total
     let interval = 50; // Update every 50ms
     let startTime = Date.now();
 
     const animationInterval = setInterval(() => {
-        winnerElements.forEach(element => {
-            const randomName = allNames[Math.floor(Math.random() * allNames.length)];
-            element.innerText = randomName;
-            element.style.opacity = 0.5;
-        });
+        const randomName = allNames[Math.floor(Math.random() * allNames.length)];
+        winnerNameElement.innerText = randomName;
+        winnerNameElement.style.opacity = 0.5;
 
         // Check if finished
         if (Date.now() - startTime > duration) {
             clearInterval(animationInterval);
-            finalizeDraw(validNames, winnerElements, drawButton);
+            finalizeDraw(validNames, winnerNameElement, drawButton);
         }
     }, interval);
 }
 
-function finalizeDraw(names, displayElements, buttonElement) {
-    // Sortear 4 vencedores únicos
-    const winners = [];
-    const availableNames = [...names];
-    
-    for (let i = 0; i < QUANTIDADE_SORTEADOS; i++) {
-        const randomIndex = Math.floor(Math.random() * availableNames.length);
-        winners.push(availableNames[randomIndex]);
-        availableNames.splice(randomIndex, 1); // Remove o nome para não repetir
-    }
+function finalizeDraw(names, displayElement, buttonElement) {
+    const winner = names[Math.floor(Math.random() * names.length)];
 
-    // Smooth stop - exibir cada vencedor
-    displayElements.forEach((element, index) => {
-        element.style.opacity = 1;
-        element.innerText = winners[index];
-    });
+    // Smooth stop
+    displayElement.style.opacity = 1;
+    displayElement.innerText = winner;
 
     // Restore button
     buttonElement.innerHTML = '<span>Sortear Novamente</span><i class="fa-solid fa-rotate-right"></i>';
@@ -89,15 +73,9 @@ function finalizeDraw(names, displayElements, buttonElement) {
 function resetar() {
     const resultContainer = document.getElementById('resultContainer');
     const drawButton = document.getElementById('drawButton');
-    const winnerElements = document.querySelectorAll('#winnersContainer .winner-name');
     const input = document.getElementById('namesInput');
 
     resultContainer.classList.add('hidden');
-    
-    // Reset winner names
-    winnerElements.forEach(element => {
-        element.innerText = '-';
-    });
 
     // Reset button state
     drawButton.innerHTML = '<span>Sortear Agora</span><i class="fa-solid fa-wand-magic-sparkles"></i>';

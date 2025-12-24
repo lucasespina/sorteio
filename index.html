@@ -25,7 +25,7 @@
                 <i class="fa-solid fa-gift"></i>
             </div>
             <h1>Sorteador</h1>
-            <p>Insira os nomes abaixo para sortear 4 vencedores</p>
+            <p>Insira os nomes abaixo para sortear o vencedor</p>
         </header>
 
         <main>
@@ -42,13 +42,8 @@
             </div>
 
             <div id="resultContainer" class="result-container hidden">
-                <p class="winner-label">Os vencedores são:</p>
-                <div id="winnersContainer" class="winners-container">
-                    <h2 class="winner-name">-</h2>
-                    <h2 class="winner-name">-</h2>
-                    <h2 class="winner-name">-</h2>
-                    <h2 class="winner-name">-</h2>
-                </div>
+                <p class="winner-label">O vencedor é:</p>
+                <h2 id="winnerName" class="winner-name">-</h2>
                 <button class="reset-btn" onclick="resetar()">Novo Sorteio</button>
             </div>
         </main>
